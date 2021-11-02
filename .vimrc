@@ -1,6 +1,5 @@
-"" Last date: 26.10.2021 13:29
-"
-"
+syntax on
+filetype plugin indent on
 "=============================== BASIC SETTINGS ==============================
 "=============================================================================
 filetype plugin indent on
@@ -21,6 +20,9 @@ set t_Co=256
 set termencoding=utf-8
 set title
 set undolevels=2048
+":term to bottom
+set splitbelow
+set termwinsize=10x0 " 'termsize' didn't work - this did for me (GVIM 8.2)
 "=============================================================================
 "============================== EDITOR SETTINGS ==============================
 "=============================================================================
@@ -41,7 +43,7 @@ set showcmd
 set showmatch
 " Подсвечивать строку с курсором
 set cursorline
-" ширина текста 
+" ширина текста
 set textwidth=120
 " Подсвечивать 120 стобец
 let &colorcolumn=&textwidth
@@ -92,62 +94,41 @@ set wildmode=longest:list,full
 "=============================================================================
 "================================= COLORSCHEME ===============================
 "=============================================================================
-"if empty(glob('~/.vim/colors/sublimemonokai.vim'))
-"silent !curl -fLo ~/.vim/colors/sublimemonokai.vim --create-dirs
-"\ https://raw.githubusercontent.com/ErichDonGubler/vim-sublime-monokai/master/colors/sublimemonokai.vim
-"endif
-"set background=dark
-"colorscheme sublimemonokai
+set rtp+=~/.vim/bundle/vim-code-dark
 colorscheme codedark
-"set list
-"set listchars=tab:>-,trail:-
-highlight SpecialKey ctermfg=154 guifg=#ffffff
-highlight NonText ctermfg=8 guifg=gray
-"=============================================================================
-"===================== AUTO-COMPLETION OF INPUT () ===========================
-"=============================================================================
-
-"=============================================================================
-"====================== COLLAPSING TEXT BLOCKS (folding) =====================
-"=============================================================================
-set foldenable
-"set foldmethod=syntax
-set foldmethod=indent
-set foldcolumn=1
-set foldlevel=2
-set foldopen=all
-set tags=tags\ $VIMRUNTIME/systags
-"=============================================================================
-"========================== FILE MANAGEMENT SETTINGS =========================
-"=============================================================================
-set fileformat=unix
-set fencs=utf-8,cp1251,koi8-r,cp866
-autocmd! bufwritepre $MYVIMRC call setline(1, '"" Last date: '.strftime("%d.%m.%Y %H:%M"))
-filetype on
-filetype plugin on
-filetype indent on
-autocmd FileType perl call SetPerlConf()
-set path=.,,**
-"=============================================================================
-"================================= PLUGINS ===================================
-"=============================================================================
-" Vundle required config
+let g:airline_theme='codedark'
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#left_sep = ' '
+let g:airline#extensions#tabline#left_alt_sep = '|'
+let g:airline_powerline_fonts = 1
+"======================================================================
+"==================== PLUGINS =========================================
+"======================================================================
 set nocompatible              " be iMproved, required
 filetype off                  " required
- 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
-" " let Vundle manage Vundle, required
-" User defined plugins
-Plugin 'gmarik/Vundle.vim'
-Plugin 'Valloric/YouCompleteMe'
-" " All of your Plugins must be added before the following line
-call vundle#end()            " required
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
 
-"=============================================================================
-"=============================== PLUGIN SETTINGS =============================
-"=============================================================================
+Plugin 'preservim/nerdtree'
+
+Plugin 'ycm-core/YouCompleteMe'
+
+Plugin 'tomasiser/vim-code-dark'
+
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+call vundle#end()            " required
+filetype plugin indent on    " required
+" Brief help
+" :PluginList       - lists configured plugins
+" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
+" :PluginSearch foo - searches for foo; append `!` to refresh local cache
+" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
 
 """""""""""""""""""""""""""""""""""""""
 """"""""""""""" NERDTree """"""""""""""
@@ -159,73 +140,4 @@ let NERDTreeMapOpenInTab='\r'
 " Configure Nerdtree
 map <C-n> :NERDTreeToggle<CR>
 
-"""""""""""""""""""""""""""""""""""""""
-"""""""""""""" Syntastic """"""""""""""
-"""""""""""""""""""""""""""""""""""""""
-"set statusline+=%#warningmsg#
-"set statusline+=%{SyntasticStatuslineFlag()}
-"set statusline+=%*
-"let g:syntastic_always_populate_loc_list = 1
-"let g:syntastic_auto_loc_list = 1
-"let g:syntastic_check_on_open = 1
-"let g:syntastic_check_on_wq = 0
 
-"""""""""""""""""""""""""""""""""""""""
-"""""""""""" FixedTaskList """"""""""""
-"""""""""""""""""""""""""""""""""""""""
-" С/C++ файлы
-autocmd filetype c,cpp set cin
- 
-" make-файлы
-" В make-файлах нам не нужно заменять табуляцию пробелами
-autocmd filetype make set noexpandtab
-autocmd filetype make set nocin
- 
-" html-файлы
-" Не расставлять отступы в стиле С в html файлах
-autocmd filetype html set noexpandtab
-autocmd filetype html set nocin
-autocmd filetype html set textwidth=160
- 
-" css-файлы
-" Не расставлять отступы в стиле C и не заменять табуляцию пробелами
-autocmd filetype css set nocin
-autocmd filetype css set noexpandtab
- 
-" python-файлы
-" Не расставлять отступы в стиле С
-autocmd filetype python set nocin
- 
-" Позволим конфигурационным файлам в проекте изменять настройки vim'a
-set exrc
-set secure
-let g:ycm_use_clangd = 0
-let g:ycm_autoclose_preview_window_after_insertion = 1
-let g:ycm_autoclose_preview_window_after_completion = 1
-let g:ycm_add_preview_to_completeopt = 0
-
-let g:ycm_complete_in_comments = 1
-let g:ycm_confirm_extra_conf = 0
-let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
-"Clang-completer
-" Включить дополнительные подсказки (аргументы функций, шаблонов и т.д.)
-let g:clang_snippets=1
-" Использоать ultisnips для дополнительных подскахок (чтобы подсказки шаблонов
-" автогенерации были в выпадающих меню)
-"let g:clang_snippets_engine = 'ultisnips'
-" Периодически проверять проект на ошибки
-let g:clang_periodic_quickfix=1
-" Подсвечивать ошибки
-let g:clang_hl_errors=1
-" Автоматически закрывать окно подсказок после выбора подсказки
-let g:clang_close_preview=1
-" По нажатию Ctrl+F проверить поект на ошибки
-map <C-F> :call g:ClangUpdateQuickFix()<CR>
- 
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-set splitright
- 
-" Snippets
-let g:ycm_key_list_select_completion=[]
-let g:ycm_key_list_previous_completion=[]
