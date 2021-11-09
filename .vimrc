@@ -22,11 +22,12 @@ set undolevels=2048
 "устанавливаем всплывающее окно снизу (терминал)
 set splitbelow
 set termwinsize=10x0
+:"packadd termdebug
 "=============================================================================
 "========================== NAVIGATION SETTINGS ==============================
 "=============================================================================
 "togle between header and source
-nnoremap <F4> :e %:p:s,.h$,.X123X,:s,.cpp$,.h,:s,.X123X$,.cpp,<CR>
+nnoremap <F3> :e %:p:s,.h$,.X123X,:s,.cpp$,.h,:s,.X123X$,.cpp,<CR>
 "":term to bottom
 set splitbelow
 set termwinsize=10x0 " 'termsize' didn't work - this did for me (GVIM 8.2)
@@ -136,6 +137,7 @@ Plugin 'neoclide/coc.nvim'
 Plugin 'vim-syntastic/syntastic'
 Plugin 'rhysd/vim-clang-format'
 Plugin 'jackguo380/vim-lsp-cxx-highlight'
+Plugin 'puremourning/vimspector'
 "Plugin 'neoclide/coc.nvim', {'branch': 'master', 'do': 'yarn install --frozen-lockfile'}
 " " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -151,7 +153,7 @@ let g:ycm_confirm_extra_conf=0
 let g:ycm_collect_identifiers_from_tag_files = 1
 set completeopt=longest,menu
 "------------------ NERDTree --------------------
-autocmd vimenter * NERDTree
+"autocmd vimenter * NERDTree
 :let g:NERDTreeWinSize=20
 "let NERDTreeIgnore=['\.pyc$', '\~$']
 let NERDTreeMapOpenInTab='\r'
@@ -196,3 +198,6 @@ nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gD <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 nnoremap <Leader>f :<C-u>ClangFormat<CR>
+"-----------    VimSpector      ------------------
+let g:vimspector_enable_mappings = 'VISUAL_STUDIO'
+packadd! vimspector

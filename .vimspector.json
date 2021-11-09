@@ -1,0 +1,17 @@
+{
+  "configurations": {
+    "Launch": {
+      "adapter": "vscode-cpptools",
+      "configuration": {
+        "request": "launch",
+        "program": "${workspaceRoot}/build/prog.out",
+        "args": [ ],
+        "cwd": "${cwd}",
+        "environment": [ ],
+        "externalConsole": true,
+        "MIMode": "gdb",
+        "externalConsole": true
+      }
+    }
+  }
+} 
