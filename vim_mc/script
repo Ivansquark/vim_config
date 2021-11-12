@@ -1,0 +1,17 @@
+#! /bin/sh
+function_to_fork1() {
+    sleep 1
+    echo "GDB::::"   
+    #konsole -e gdb-multiarch build/main.elf
+    gdb-multiarch build/main.elf
+}
+
+function_to_fork1 &
+# ... execution continues in parent process ..
+
+function_to_fork2() {
+    echo "OPENOCD::::"
+    "/usr/bin/openocd" "-c" "gdb_port 50000" "-s" "/usr/share/openocd/scripts" "-f" "./lib/stlink.cfg" "-f" "./lib/stm32h7x.cfg" 
+}
+
+function_to_fork2 &
