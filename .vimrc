@@ -86,6 +86,8 @@ let &t_EI.="\e[1 q" "EI = нормальный режим  5 - мигающая 
 "=============================================================================
 " автоматически расставлять отступы
 set autoindent
+
+set paste
 " Заменять табуляцию на пробелы
 set expandtab
 set pastetoggle=
@@ -93,7 +95,7 @@ set shiftwidth=4
 set smarttab
 set smartindent
 set softtabstop=4
-" задать размер табуляции в два пробела
+" задать размер табуляции в четыре пробела
 set tabstop=4
 au FileType crontab,fstab set noexpandtab tabstop=8 shiftwidth=8
 au FileType make set noexpandtab tabstop=4 shiftwidth=4
@@ -137,8 +139,7 @@ Plugin 'neoclide/coc.nvim'
 Plugin 'vim-syntastic/syntastic'
 Plugin 'rhysd/vim-clang-format'
 Plugin 'jackguo380/vim-lsp-cxx-highlight'
-Plugin 'puremourning/vimspector'
-"Plugin 'neoclide/coc.nvim', {'branch': 'master', 'do': 'yarn install --frozen-lockfile'}
+"Plugin 'puremourning/vimspector'
 " " All of your Plugins must be added before the following line
 call vundle#end()            " required
 
@@ -157,6 +158,7 @@ set completeopt=longest,menu
 :let g:NERDTreeWinSize=20
 "let NERDTreeIgnore=['\.pyc$', '\~$']
 let NERDTreeMapOpenInTab='\r'
+let NERDTreeShowHidden=1
 " Configure Nerdtree
 map <C-n> :NERDTreeToggle<CR>
 "---------------    AIRLINE     -----------------
@@ -199,5 +201,5 @@ nmap <silent> gD <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 nnoremap <Leader>f :<C-u>ClangFormat<CR>
 "-----------    VimSpector      ------------------
-let g:vimspector_enable_mappings = 'VISUAL_STUDIO'
-packadd! vimspector
+"let g:vimspector_enable_mappings = 'VISUAL_STUDIO'
+"packadd! vimspector
