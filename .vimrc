@@ -194,11 +194,27 @@ let g:cpp_member_variable_highlight = 1
 let g:cpp_class_decl_highlight = 1
 "------     Auto-Formatting     ------------------
 ".clang-format config-file in the root of your project.
-"-----------     COC     -------------------------
+"+--------------------------------------------------+
+"|                  CoCnvim                         |
+"+--------------------------------------------------+
+" Use `[c` and `]c` to navigate diagnostics
+nmap <silent> [c <Plug>(coc-diagnostic-prev)
+nmap <silent> ]c <Plug>(coc-diagnostic-next)
+" Use <c-space> to trigger completion.
+inoremap <silent><expr> <c-space> coc#refresh()
+" Use tab for trigger completion with characters ahead and navigate.
+" Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+" always show signcolumns
+set signcolumn=yes
 " key mappings example
-nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> <F12> <Plug>(coc-definition)
 nmap <silent> gD <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
+nmap <silent> <F10> <Plug>(coc-references)
 nnoremap <Leader>f :<C-u>ClangFormat<CR>
 "-----------    VimSpector      ------------------
 "let g:vimspector_enable_mappings = 'VISUAL_STUDIO'
