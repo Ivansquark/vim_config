@@ -62,7 +62,7 @@ set scrolloff=4
 set showcmd
 set showmatch
 set cursorline                  " Подсвечивать строку с курсором
-set textwidth=120               " ширина текста
+set textwidth=80               " ширина текста
 let &colorcolumn=&textwidth     " Подсвечивать 120 стобец
 highlight ColorColumn ctermbg=darkgray
 "set visualbell                 " Раздражающая подсветка
@@ -141,6 +141,15 @@ call vundle#end()            " required
 "let g:ycm_confirm_extra_conf=0
 "let g:ycm_collect_identifiers_from_tag_files = 1
 "set completeopt=longest,menu
+"
+"------------------ Encoding menu ---------------
+set wildmenu
+set wcm=<Tab>
+menu Encoding.koi8-r :e ++enc=koi8-r<CR>
+menu Encoding.windows-1251 :e ++enc=cp1251<CR>
+menu Encoding.cp866 :e ++enc=cp866<CR>
+menu Encoding.utf-8 :e ++enc=utf8 <CR>
+map <F8> :emenu Encoding.<TAB>
 "------------------ NERDTree --------------------
 "autocmd vimenter * NERDTree
 :let g:NERDTreeWinSize=20
@@ -154,19 +163,17 @@ let g:airline_powerline_fonts = 1
 if !exists('g:airline_symbols')
   let g:airline_symbols = {}
 endif
-" Unicode symbols
-let g:airline_left_sep = '»'
-let g:airline_left_sep = '▶'
-let g:airline_right_sep = '«'
-let g:airline_right_sep = '◀'
-let g:airline_symbols.linenr = '␊'
-let g:airline_symbols.linenr = '␤'
+"  " powerline symbols
+let g:airline_left_sep = ''
+let g:airline_left_alt_sep = ''
+let g:airline_right_sep = ''
+let g:airline_right_alt_sep = ''
+let g:airline_symbols.branch = ''
+let g:airline_symbols.colnr = ' '
+let g:airline_symbols.readonly = ''
 let g:airline_symbols.linenr = ' '
-let g:airline_symbols.branch = '⎇'
-let g:airline_symbols.paste = 'ρ'
-let g:airline_symbols.paste = 'Þ'
-let g:airline_symbols.paste = '∥'
-let g:airline_symbols.whitespace = 'Ξ'
+let g:airline_symbols.maxlinenr = ' '
+let g:airline_symbols.dirty='⚡'
 "---------    C++ syntax highlight  ------------------
 let g:cpp_class_scope_highlight = 1
 let g:cpp_member_variable_highlight = 1
